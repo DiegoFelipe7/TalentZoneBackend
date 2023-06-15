@@ -6,8 +6,6 @@ import reactor.core.publisher.Mono;
 public interface BuysRepository {
     Mono<Buys> save(Buys buys);
     Flux<Buys> findAll();
-    Mono<Buys> findById(String id);
-    Mono<Void> deleteById(String id);
 
 
 }

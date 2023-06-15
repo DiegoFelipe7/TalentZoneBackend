@@ -13,8 +13,8 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class BuysRouterRest {
     @Bean
     public RouterFunction<ServerResponse> routerFunctionBuys(BuysHandler handler) {
-        return route(GET("/api/buys"), handler::shoppingList)
+        return route(GET("/api/buys/history"), handler::shoppingList)
                 .andRoute(POST("/api/buys"), handler::saveBuy)
-                .and(route(GET("/api/buys/{identification}"), handler::shoppingListUser));
+                .and(route(GET("/api/buys/history/{identification}"), handler::shoppingListUser));
     }
 }

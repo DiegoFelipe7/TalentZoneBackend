@@ -31,20 +31,24 @@ public class SaveBuysUseCase implements Function<Buys, Mono<Buys>> {
                 });
     }
 
-    private Mono<Products> validateProduct(Products product) {
+
+    public Mono<Products> validateProduct(Products product) {
         return productsRepository.findById(product.getId())
                 .switchIfEmpty(Mono.error(new BusinessException(BusinessException.Type.ERROR_EL_PRODUCTO_NO_EXISTES)))
                 .flatMap(data -> {
-                    if (data.getMin() >= product.getQuantity() || data.getInInventory() <= product.getQuantity()) {
+                    if (data.getMin() >= product.getQuantity() || data.getMax() <= product.getQuantity()) {
                         return Mono.error(new BusinessException(BusinessException.Type.ERROR_EN_LA_CANTIDAD));
+                    }
+                    if(data.getInInventory() <= product.getQuantity()){
+                        return Mono.error(new BusinessException(BusinessException.Type.NO_HAY_EXISTENCIAS));
                     }
                     return Mono.just(product);
                 });
     }
-    private Mono<Buys> saveBuys(Buys buys) {
+    public Mono<Buys> saveBuys(Buys buys) {
         return buysRepository.save(buys);
     }
-    private Mono<Void> eliminateQuantities(List<Products> validatedProducts) {
+    public Mono<Void> eliminateQuantities(List<Products> validatedProducts) {
         return Flux.fromIterable(validatedProducts)
                 .flatMap(product -> productsRepository.findById(product.getId())
                         .flatMap(p -> {

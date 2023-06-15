@@ -19,3 +19,7 @@ management:
     health:
       probes:
         enabled: true
+springdoc:
+  swagger-ui:
+    path: /swagger.html
+    enabled: true

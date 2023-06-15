@@ -1,10 +1,6 @@
 package co.com.sofka.model.buys;
 import co.com.sofka.model.products.Products;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +11,7 @@ import java.util.Locale;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@ToString
 public class Buys {
     private String id;
     private LocalDateTime date = LocalDateTime.now();
