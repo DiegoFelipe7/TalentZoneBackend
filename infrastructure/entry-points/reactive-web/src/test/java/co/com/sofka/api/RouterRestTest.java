@@ -2,6 +2,7 @@ package co.com.sofka.api;
 
 import co.com.sofka.api.products.ProductsHandler;
 import co.com.sofka.api.products.ProductsRouterRest;
+import co.com.sofka.model.products.Products;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ class RouterRestTest {
     @Test
     void testListenGETUseCase() {
         webTestClient.get()
-                .uri("/api/usecase/path")
+                .uri("/api/products")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(String.class)
+                .expectBody(Products.class)
                 .value(userResponse -> {
-                            Assertions.assertThat(userResponse).isEmpty();
+                            Assertions.assertThat(userResponse.getId()).isNotEmpty();
                         }
                 );
     }
