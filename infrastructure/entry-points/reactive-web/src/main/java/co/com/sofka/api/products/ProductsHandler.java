@@ -4,6 +4,7 @@ import co.com.sofka.model.products.Products;
 import co.com.sofka.usecase.products.editproduct.EditProductUseCase;
 import co.com.sofka.usecase.products.getproduct.GetProductUseCase;
 import co.com.sofka.usecase.products.getproductid.GetProductIdUseCase;
+import co.com.sofka.usecase.products.productpage.ProductPageUseCase;
 import co.com.sofka.usecase.products.removeproduct.RemoveProductUseCase;
 import co.com.sofka.usecase.products.saveproduct.SaveProductUseCase;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +21,21 @@ public class ProductsHandler {
     private final GetProductIdUseCase getProductId;
     private final SaveProductUseCase saveProduct;
     private final EditProductUseCase editProduct;
-
     private final RemoveProductUseCase removeProduct;
+    private final ProductPageUseCase productPage;
 
     public Mono<ServerResponse> listProduct(ServerRequest serverRequest) {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(getProduct.get(), Products.class);
+    }
+
+    public Mono<ServerResponse> productsPage(ServerRequest serverRequest) {
+        Integer page = Integer.parseInt(serverRequest.queryParam("page").orElse("1"));
+        Integer pageSize = Integer.parseInt(serverRequest.queryParam("pageSize").orElse("10"));
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(productPage.apply(page,pageSize), Products.class);
     }
     public Mono<ServerResponse> getProductId(ServerRequest serverRequest) {
         String id = serverRequest.pathVariable("id");

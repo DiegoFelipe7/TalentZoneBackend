@@ -14,6 +14,7 @@ public class ProductsRouterRest {
     public RouterFunction<ServerResponse> routerFunctionProducts(ProductsHandler handler) {
         return route(GET("/api/products"), handler::listProduct)
                 .andRoute(GET("/api/product/{id}") , handler::getProductId)
+                .andRoute(GET("/api/products/pagination") , handler::productsPage)
                 .andRoute(POST("/api/product"), handler::saveProduct)
                 .andRoute(PUT("/api/product/{id}"), handler::editProduct)
                 .and(route(DELETE("/api/product/remove/{id}"), handler::removeProduct));

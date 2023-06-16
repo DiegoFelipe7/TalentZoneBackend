@@ -48,22 +48,42 @@ Este módulo es el más externo de la arquitectura, es el encargado de ensamblar
  
 ## Peticiones producto
 Peticiones para productos 
+
 ![img.png](img.png)
+
+Peticion para productos con paginación
+
+![img_9.png](img_9.png)
+
 Peticion para filtrar por un id 
+
 ![img_1.png](img_1.png)
+
 Peticion para guardar un producto 
+
 ![img_2.png](img_2.png)
+
 Peticion para actualizar un producto
+
 ![img_3.png](img_3.png)
+
 Peticion para eliminar un producto
+
 ![img_4.png](img_4.png)
 
 ## Peticiones compras
 Validacion para la compra de productos con respecto a minimos y maximos
+
 ![img_5.png](img_5.png)
+
 Peticion para compra de productos
+
 ![img_6.png](img_6.png)
+
 Peticion de historial de compras 
+
 ![img_7.png](img_7.png)
+
 Peticion historial de compras usuario
+
 ![img_8.png](img_8.png)
