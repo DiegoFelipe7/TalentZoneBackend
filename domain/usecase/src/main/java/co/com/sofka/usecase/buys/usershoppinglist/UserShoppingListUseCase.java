@@ -15,7 +15,7 @@ public class UserShoppingListUseCase implements Function<String , Flux<Buys>> {
     @Override
     public Flux<Buys> apply(String id) {
         return buysRepository.findAll()
-                .filter(ele->ele.getIdentification().equals(id))
+                .filter(ele->ele.getIdentification().contains(id))
                 .switchIfEmpty(Mono.error(new BusinessException(BusinessException.Type.NO_HAY_COMPRAS_POR_EL_USUARIO)));
     }
 }
